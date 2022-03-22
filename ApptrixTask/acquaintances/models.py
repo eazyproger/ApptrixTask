@@ -8,7 +8,7 @@ class CustomUser(AbstractBaseUser):
     email = models.EmailField('email address', unique=True)
     first_name = models.CharField(max_length=20)
     second_name = models.CharField(max_length=30)
-    avatar = models.ImageField(upload_to='avatars')
+    avatar = models.ImageField(upload_to='acquaintances/avatars')
     gender = models.CharField(max_length=7)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
