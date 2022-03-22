@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
 
-from .manager import UserManager
+from .manager import CustomUserManager
 
 
 class CustomUser(AbstractBaseUser):
@@ -16,7 +16,7 @@ class CustomUser(AbstractBaseUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    objects = UserManager()
+    objects = CustomUserManager()
 
     def __str__(self):
         return self.email
