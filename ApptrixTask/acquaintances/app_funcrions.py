@@ -1,3 +1,6 @@
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from PIL import Image
 
 
@@ -11,3 +14,23 @@ def add_photo_watermark(input_image_path, email):
     transparent.paste(watermark, watermark_position, mask=watermark)
     transparent.save(output_image_path)
     return output_image_path
+
+
+def send_message(email, name):
+    address_from = 'apptrixtaskmail@gmail.com'
+    password = 'qwertyG!'
+    address_to = email
+    body = 'Вы понравились ' + name + '! Вот его почта: ' + email
+
+    message = MIMEMultipart()
+    message['From'] = address_from
+    message['To'] = address_to
+    message['Subject'] = 'Вы кому-то понравились!'
+    message.attach(MIMEText(body))
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.ehlo()
+    server.starttls()
+    server.login(address_from, password)
+    server.send_message(message)
+    server.quit()

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import CustomUser
+from .models import CustomUser, MatchModel
 from .app_funcrions import add_photo_watermark
 
 
@@ -22,3 +22,11 @@ class CustomUserSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+
+class MatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MatchModel
+        fields = []
+
+

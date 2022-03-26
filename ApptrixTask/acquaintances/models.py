@@ -20,3 +20,11 @@ class CustomUser(AbstractBaseUser):
 
     def __str__(self):
         return self.email
+
+
+class MatchModel(models.Model):
+    first_email = models.EmailField('first email address')
+    second_email = models.EmailField('second email address')
+
+    def __str__(self):
+        return self.first_email + ' ' + self.second_email
