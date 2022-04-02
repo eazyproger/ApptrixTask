@@ -1,0 +1,1 @@
+web: gunicorn acquaintances.wsgi --log-file -
