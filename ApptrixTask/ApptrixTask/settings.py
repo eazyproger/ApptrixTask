@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'acquaintances.CustomUser'
 
-# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'acquaintances',
+    'django_filters',
 ]
+# Application definition
 
 
 MIDDLEWARE = [

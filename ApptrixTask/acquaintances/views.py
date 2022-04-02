@@ -1,6 +1,8 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.response import Response
+
 from .app_funcrions import send_message
 from .models import CustomUser, MatchModel
 from .serializers import CustomUserSerializer, MatchSerializer
@@ -9,6 +11,13 @@ from .serializers import CustomUserSerializer, MatchSerializer
 class UserCreateView(CreateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
+
+
+class UserListView(ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['first_name', 'second_name', 'gender', ]
 
 
 class CreateMatchView(CreateAPIView):
@@ -22,7 +31,7 @@ class CreateMatchView(CreateAPIView):
             person_one_name = CustomUser.objects.get(id=id).first_name
             second_email = self.request.user.email
             person_two_name = self.request.user.first_name
-            match = [match for match in MatchModel.objects.all()
+            match = [match for match in self.get_queryset()
                      if (match.first_email == first_email and match.second_email == second_email)
                      or (match.first_email == second_email and match.second_email == first_email)]
             if match:
